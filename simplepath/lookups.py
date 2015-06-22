@@ -45,7 +45,6 @@ class KeyLookup(BaseLookup):
             return node[self.key]
         else:
             return getattr(node, self.key)
-            
 
     def repr(self):
         return 'key="{}"'.format(self.key)

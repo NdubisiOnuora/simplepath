@@ -158,12 +158,14 @@ class TestFindInListLookup(unittest.TestCase):
 
     def test_call_exists_object_data(self):
         self.lookup.conditions = {'foo': 'bar'}
+
         class Example(object):
             def __init__(self, foo, happy):
                 self.foo = foo
                 self.happy = happy
 
-        data = [Example(None, "rainbows"), Example("bar", "rainbows"), Example("foo", "rainbows")]
+        data = [Example(None, "rainbows"), Example("bar", "rainbows"),
+                Example("foo", "rainbows")]
 
         actual = self.lookup(data)
 
@@ -171,12 +173,14 @@ class TestFindInListLookup(unittest.TestCase):
 
     def test_call_does_not_exist_object_data(self):
         self.lookup.conditions = {'foo': 'barbar'}
+
         class Example(object):
             def __init__(self, foo, happy):
                 self.foo = foo
                 self.happy = happy
 
-        data = [Example(None, "rainbows"), Example("bar", "rainbows"), Example("foo", "rainbows")]
+        data = [Example(None, "rainbows"), Example("bar", "rainbows"),
+                Example("foo", "rainbows")]
 
         with self.assertRaises(ValueError):
             self.lookup(data)

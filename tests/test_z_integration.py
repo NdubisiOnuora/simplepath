@@ -87,7 +87,8 @@ class TestIntegration(unittest.TestCase):
                 self.planet = planet
                 self.residents = residents
 
-        planets = [Planet("Mars", "marsians"), Planet("Earth", "people"), Planet("Space", "aliens")]
+        planets = [Planet("Mars", "marsians"), Planet("Earth", "people"),
+                   Planet("Space", "aliens")]
         data = Example("Bonjour", planets)
 
         expected = {
@@ -111,4 +112,3 @@ class TestIntegration(unittest.TestCase):
         }
 
         self.assertDictEqual(ObjectConfig.map_data(data), expected)
-
