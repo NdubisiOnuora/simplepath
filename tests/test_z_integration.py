@@ -27,7 +27,7 @@ class TestIntegration(unittest.TestCase):
                 'planets': [
                     {
                         'planet': 'Mars',
-                        'residents': 'marsians',
+                        'residents': 'martians',
                     },
                     {
                         'planet': 'Earth',
@@ -47,7 +47,7 @@ class TestIntegration(unittest.TestCase):
             'neighbors': [
                 {
                     'from': 'Mars',
-                    'neighbors': 'marsians',
+                    'neighbors': 'martians',
                 },
                 {
                     'from': 'Earth',
@@ -87,7 +87,7 @@ class TestIntegration(unittest.TestCase):
                 self.planet = planet
                 self.residents = residents
 
-        planets = [Planet("Mars", "marsians"), Planet("Earth", "people"),
+        planets = [Planet("Mars", "martians"), Planet("Earth", "people"),
                    Planet("Space", "aliens")]
         data = Example("Bonjour", planets)
 
@@ -98,7 +98,7 @@ class TestIntegration(unittest.TestCase):
             'neighbors': [
                 {
                     'from': 'Mars',
-                    'neighbors': 'marsians',
+                    'neighbors': 'martians',
                 },
                 {
                     'from': 'Earth',

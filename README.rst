@@ -78,7 +78,7 @@ Here is a quick example.
             'planets': [
                 {
                     'planet': 'Mars',
-                    'residents': 'marsians',
+                    'residents': 'martians',
                 },
                 {
                     'planet': 'Earth',
@@ -119,7 +119,7 @@ Here is another example if your data is stored in an object.
             self.planet = planet
             self.residents = residents
 
-    planets = [Planet('Mars', 'marsians'), Planet('Earth', 'people'),
+    planets = [Planet('Mars', 'martians'), Planet('Earth', 'people'),
                Planet('Space', 'aliens')]
     data = Example('Hello', planets)
 
