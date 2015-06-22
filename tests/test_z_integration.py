@@ -61,3 +61,54 @@ class TestIntegration(unittest.TestCase):
         }
 
         self.assertDictEqual(Config.map_data(data), expected)
+
+    def test_everything_object(self):
+        class ObjectConfig(Mapper):
+            config = {
+                "greetings": "greetings",
+                "from": Value("friends"),
+                "to": "planets.<find:planet=Earth>.residents",
+                "neighbors": ListConfig(
+                    "planets",
+                    {
+                        "from": "planet",
+                        "neighbors": "residents",
+                    },
+                ),
+            }
+
+        class Example(object):
+            def __init__(self, greetings, planets):
+                self.greetings = greetings
+                self.planets = planets
+
+        class Planet(object):
+            def __init__(self, planet, residents):
+                self.planet = planet
+                self.residents = residents
+
+        planets = [Planet("Mars", "marsians"), Planet("Earth", "people"), Planet("Space", "aliens")]
+        data = Example("Bonjour", planets)
+
+        expected = {
+            'greetings': 'Bonjour',
+            'from': 'friends',
+            'to': 'people',
+            'neighbors': [
+                {
+                    'from': 'Mars',
+                    'neighbors': 'marsians',
+                },
+                {
+                    'from': 'Earth',
+                    'neighbors': 'people',
+                },
+                {
+                    'from': 'Space',
+                    'neighbors': 'aliens',
+                }
+            ]
+        }
+
+        self.assertDictEqual(ObjectConfig.map_data(data), expected)
+

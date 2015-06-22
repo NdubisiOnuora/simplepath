@@ -41,8 +41,11 @@ class KeyLookup(BaseLookup):
     def __call__(self, node, extra=None):
         if isinstance(node, (list, tuple)):
             return node[int(self.key)]
-        else:
+        elif isinstance(node, dict):
             return node[self.key]
+        else:
+            return getattr(node, self.key)
+            
 
     def repr(self):
         return 'key="{}"'.format(self.key)
@@ -54,7 +57,10 @@ class FindInListLookup(BaseLookup):
 
     def __call__(self, nodes, extra=None):
         for node in nodes:
-            present = {k: node.get(k) for k in self.conditions}
+            if isinstance(node, dict):
+                present = {k: node.get(k) for k in self.conditions}
+            else:
+                present = {k: getattr(node, k) for k in self.conditions}
             if present == self.conditions:
                 return node
         raise ValueError('Not found any node matching all conditions')

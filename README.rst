@@ -19,7 +19,6 @@ such as ``xpath``, ``jsonpath``, ``jpath``, etc.
 
 * Free software: MIT license
 * GitHub: https://github.com/dealertrack/simplepath
-* Documentation: https://simplepath.readthedocs.org.
 
 Inspiration
 -----------

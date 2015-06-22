@@ -87,6 +87,17 @@ class TestKeyLookup(unittest.TestCase):
 
         self.assertEqual(actual, 'bar')
 
+    def test_call_object(self):
+        """Ensure that we can lookup values in non iterable objects.
+        """
+        class Bike(object):
+            def __init__(self, speed):
+                self.speed = speed
+        bike = Bike(100)
+        self.lookup.key = "speed"
+        actual = self.lookup(bike)
+        self.assertEqual(actual, 100)
+
     def test_repr(self):
         self.lookup.key = 'foo'
 
@@ -106,7 +117,7 @@ class TestFindInListLookup(unittest.TestCase):
             {'foo': 'bar'}
         )
 
-    def test_call_exists(self):
+    def test_call_exists_dict_data(self):
         self.lookup.conditions = {'foo': 'bar'}
         data = [
             {
@@ -126,7 +137,7 @@ class TestFindInListLookup(unittest.TestCase):
 
         self.assertDictEqual(actual, data[1])
 
-    def test_call_does_not_exist(self):
+    def test_call_does_not_exist_dict_data(self):
         self.lookup.conditions = {'foo': 'barbar'}
         data = [
             {
@@ -141,6 +152,31 @@ class TestFindInListLookup(unittest.TestCase):
                 'happy': 'rainbows',
             },
         ]
+
+        with self.assertRaises(ValueError):
+            self.lookup(data)
+
+    def test_call_exists_object_data(self):
+        self.lookup.conditions = {'foo': 'bar'}
+        class Example(object):
+            def __init__(self, foo, happy):
+                self.foo = foo
+                self.happy = happy
+
+        data = [Example(None, "rainbows"), Example("bar", "rainbows"), Example("foo", "rainbows")]
+
+        actual = self.lookup(data)
+
+        self.assertEqual(actual, data[1])
+
+    def test_call_does_not_exist_object_data(self):
+        self.lookup.conditions = {'foo': 'barbar'}
+        class Example(object):
+            def __init__(self, foo, happy):
+                self.foo = foo
+                self.happy = happy
+
+        data = [Example(None, "rainbows"), Example("bar", "rainbows"), Example("foo", "rainbows")]
 
         with self.assertRaises(ValueError):
             self.lookup(data)
