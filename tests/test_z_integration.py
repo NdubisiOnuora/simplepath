@@ -19,6 +19,11 @@ class TestIntegration(unittest.TestCase):
                         'neighbors': 'residents',
                     },
                 ),
+                'owning': [
+                    'cool_object',
+                    Value('with'),
+                    Value('Ion Engine'),
+                ],
             }
 
         data = {
@@ -27,7 +32,7 @@ class TestIntegration(unittest.TestCase):
                 'planets': [
                     {
                         'planet': 'Mars',
-                        'residents': 'marsians',
+                        'residents': 'martians',
                     },
                     {
                         'planet': 'Earth',
@@ -38,7 +43,8 @@ class TestIntegration(unittest.TestCase):
                         'residents': 'aliens',
                     },
                 ]
-            }
+            },
+            'cool_object': 'Space Shuttle',
         }
         expected = {
             'greetings': 'Hello',
@@ -47,7 +53,7 @@ class TestIntegration(unittest.TestCase):
             'neighbors': [
                 {
                     'from': 'Mars',
-                    'neighbors': 'marsians',
+                    'neighbors': 'martians',
                 },
                 {
                     'from': 'Earth',
@@ -57,6 +63,11 @@ class TestIntegration(unittest.TestCase):
                     'from': 'Space',
                     'neighbors': 'aliens',
                 }
+            ],
+            'owning': [
+                'Space Shuttle',
+                'with',
+                'Ion Engine',
             ]
         }
 

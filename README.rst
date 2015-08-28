@@ -78,7 +78,7 @@ Here is a quick example.
             'planets': [
                 {
                     'planet': 'Mars',
-                    'residents': 'marsians',
+                    'residents': 'martians',
                 },
                 {
                     'planet': 'Earth',
